@@ -24,8 +24,13 @@
             <th>
                 @Html.DisplayNameFor(model => model.Details)
             </th>
-            <th></th>
-        </tr>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <th>
+                    Manage
+                </th>
+            }
+            </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
@@ -42,12 +47,18 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Details)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <th>
+                    Manage
+                </th>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            }
+            </tr>
 }
     </tbody>
 </table>

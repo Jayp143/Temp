@@ -21,8 +21,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.CompanyDetails)
             </th>
-            <th></th>
-        </tr>
+            <th>
+                @if (User.Identity.IsAuthenticated)
+                {
+                <th>
+                    Manage
+                </th>
+            }
+                </th>
+            </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
@@ -36,11 +43,17 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CompanyDetails)
             </td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <th>
+                    Manage
+                </th>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CompanyName">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.CompanyName">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.CompanyName">Delete</a>
             </td>
+            }
         </tr>
 }
     </tbody>
