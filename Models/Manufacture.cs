@@ -9,12 +9,30 @@ namespace FurnitureStore.Models
 {
     public class Manufacture
     {
+        public Manufacture()
+        {
+            CompanyName = "";
+            CompanyDetails = "";
+
+
+        }
+
+
         [ForeignKey("ID")]
         public int ManufacturerID { get; set; }
         [Key]
-        public String CompanyName { get; set; }
+        public string CompanyName { get; set; }
         public string ContactNumber { get; set; }
 
-        public String CompanyDetails { get; set; }
+        public string CompanyDetails { get; set; }
+
+
+
     }
-}
+    }
+
+
+
+
+
+

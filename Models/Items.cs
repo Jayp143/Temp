@@ -8,14 +8,24 @@ namespace FurnitureStore.Models
 {
     public class Items
     {
+        public Items() {
+
+
+            ProductName = "";
+            Details = "";
+
+
+        }
+
+
         [Key]
         public int ID { get; set; }
 
         public int ProductId { get; set; }
 
-        public String ProductName { get; set; }
+        public string ProductName { get; set; }
 
         public int productprice { get; set; }
-        public String Details { get; set; }
+        public string Details { get; set; }
     }
 }
