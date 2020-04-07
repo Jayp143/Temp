@@ -9,10 +9,18 @@ namespace FurnitureStore.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+        private object options;
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
+
+        public ApplicationDbContext(object options)
+        {
+            this.options = options;
+        }
+
         public DbSet<FurnitureStore.Models.Items> Items { get; set; }
         public DbSet<FurnitureStore.Models.Manufacture> Manufacture { get; set; }
     }

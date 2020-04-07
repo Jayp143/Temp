@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using FurnitureStore.Data;
 using FurnitureStore.Models;
 
-namespace FurnitureStore.Controllers
+namespace FurnitureStore.Controllers 
 {
     public class ItemsController : Controller
     {
@@ -41,6 +41,51 @@ namespace FurnitureStore.Controllers
             }
 
             return View(items);
+        }
+
+        public static void add(global::FunitureStore.itemcontroller itemcontroller)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void add(global::FunitureStore.itemcontroller itemcontroller)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void add(global::FunitureStore.item item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void add(global::FunitureStore.item item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void add(global::FunitureStore.item item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void add(global::FunitureStore.item item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void add(global::FunitureStore.item item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void add(global::FunitureStore.item item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void add(ItemsController itemsController)
+        {
+            throw new NotImplementedException();
         }
 
         // GET: Items/Create
