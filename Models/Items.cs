@@ -8,6 +8,8 @@ namespace FurnitureStore.Models
 {
     public class Items
     {
+        public int ProductID;
+
         public Items() {
 
 
@@ -27,5 +29,14 @@ namespace FurnitureStore.Models
 
         public int productprice { get; set; }
         public string Details { get; set; }
+        public int Itemsid { get; set; }
+        public string Model { get; set; }
+        public int Price { get; set; }
+        public object Product { get; internal set; }
+
+        public static void Add(Items items)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

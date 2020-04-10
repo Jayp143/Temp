@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using FurnitureStore.Models;
+using System.Collections;
 
 namespace FurnitureStore.Data
 {
@@ -23,5 +24,6 @@ namespace FurnitureStore.Data
 
         public DbSet<FurnitureStore.Models.Items> Items { get; set; }
         public DbSet<FurnitureStore.Models.Manufacture> Manufacture { get; set; }
+        public IEnumerable Products { get; internal set; }
     }
 }

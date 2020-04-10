@@ -2,30 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FurnitureStore.Data;
+using FurnitureStore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using FurnitureStore.Data;
-using FurnitureStore.Models;
 
-namespace FurnitureStore.Controllers 
+
+namespace FurnitureStore.Controllers
 {
-    public class ItemsController : Controller
+    public class ItemssController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ItemsController(ApplicationDbContext context)
+        public ItemssController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Items
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Items.ToListAsync());
+            var applicationDbContext = _context.Items.Include(e => e.Product);
+            return View("Index", await applicationDbContext.ToListAsync());
         }
-
-        // GET: Items/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,84 +32,42 @@ namespace FurnitureStore.Controllers
                 return NotFound();
             }
 
-            var items = await _context.Items
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (items == null)
+            var Items = await _context.Items
+                .Include(e => e.Product)
+                .FirstOrDefaultAsync(m => m.Itemsid == id);
+            if (Items == null)
             {
                 return NotFound();
             }
 
-            return View(items);
+            return View(Items);
         }
 
-        public static void add(global::FunitureStore.itemcontroller itemcontroller)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static void add(global::FunitureStore.itemcontroller itemcontroller)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static void add(global::FunitureStore.item item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static void add(global::FunitureStore.item item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static void add(global::FunitureStore.item item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static void add(global::FunitureStore.item item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static void add(global::FunitureStore.item item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static void add(global::FunitureStore.item item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static void add(ItemsController itemsController)
-        {
-            throw new NotImplementedException();
-        }
-
-        // GET: Items/Create
+        // Items/Create
         public IActionResult Create()
         {
+            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "ProductID");
             return View();
         }
 
-        // POST: Items/Create
+        //  Items/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,ProductId,ProductName,productprice,Details")] Items items)
+        public async Task<IActionResult> Create([Bind("Itemsid,Model,Size,Price,ProductID")] Items Items)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(items);
+                _context.Add(Items);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(items);
+            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "ProductID", Items.ProductID);
+            return View(Items);
         }
 
-        // GET: Items/Edit/5
+        // Items/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -118,22 +75,23 @@ namespace FurnitureStore.Controllers
                 return NotFound();
             }
 
-            var items = await _context.Items.FindAsync(id);
-            if (items == null)
+            var Items = await _context.Items.FindAsync(id);
+            if (Items == null)
             {
                 return NotFound();
             }
-            return View(items);
+            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "ProductID", Items.ProductID);
+            return View(Items);
         }
 
-        // POST: Items/Edit/5
+        // Items/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,ProductId,ProductName,productprice,Details")] Items items)
+        public async Task<IActionResult> Edit(int id, [Bind("Itemsid,Model,Size,Price,ProductID")] Items Items)
         {
-            if (id != items.ID)
+            if (id != Items.Itemsid)
             {
                 return NotFound();
             }
@@ -142,12 +100,12 @@ namespace FurnitureStore.Controllers
             {
                 try
                 {
-                    _context.Update(items);
+                    _context.Update(Items);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ItemsExists(items.ID))
+                    if (!ItemsExists(Items.Itemsid))
                     {
                         return NotFound();
                     }
@@ -158,10 +116,16 @@ namespace FurnitureStore.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(items);
+            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "ProductID", Items.ProductID);
+            return View(Items);
         }
 
-        // GET: Items/Delete/5
+        private bool ItemsExists(int itemsid)
+        {
+            throw new NotImplementedException();
+        }
+
+        //Items/Delete
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -169,30 +133,30 @@ namespace FurnitureStore.Controllers
                 return NotFound();
             }
 
-            var items = await _context.Items
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (items == null)
+            var Items = await _context.Items
+                .Include(e => e.Product)
+                .FirstOrDefaultAsync(m => m.Itemsid == id);
+            if (Items == null)
             {
                 return NotFound();
             }
 
-            return View(items);
+            return View(Items);
         }
 
-        // POST: Items/Delete/5
+        // Items/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var items = await _context.Items.FindAsync(id);
-            _context.Items.Remove(items);
+            var Items = await _context.Items.FindAsync(id);
+            _context.Items.Remove(Items);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
-        private bool ItemsExists(int id)
+        private bool Items Exists(int id)
         {
-            return _context.Items.Any(e => e.ID == id);
+            return _context.Items.Any(e => e.Itemsid == id);
         }
     }
 }
